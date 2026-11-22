@@ -1,0 +1,144 @@
+{
+  "atomCode": "ssh",
+  "name": "SSH",
+  "version": "1.0.0",
+  "description": "Copies files to another machine over SSH, or runs a shell command over there: one connection, two verbs.",
+  "execution": {
+    "packagePath": "ssh.jar",
+    "language": "java",
+    "target": "$atom_java_path -cp ssh.jar com.jenkinschina.atom.sdk.AtomRunner"
+  },
+  "input": {
+    "action": {
+      "label": "动作",
+      "type": "select",
+      "default": "publish",
+      "options": [
+        {
+          "label": "发布文件（publish）",
+          "value": "publish"
+        },
+        {
+          "label": "执行命令（exec）",
+          "value": "exec"
+        }
+      ]
+    },
+    "host": {
+      "label": "主机",
+      "type": "vuex-input",
+      "default": ""
+    },
+    "port": {
+      "label": "端口",
+      "type": "vuex-input",
+      "default": "22"
+    },
+    "user": {
+      "label": "用户名",
+      "type": "vuex-input",
+      "default": ""
+    },
+    "command": {
+      "label": "要执行的命令（action=exec）",
+      "type": "textarea",
+      "default": ""
+    },
+    "expectedExitCode": {
+      "label": "期望退出码（action=exec）",
+      "type": "vuex-input",
+      "default": "0"
+    },
+    "failOnError": {
+      "label": "退出码不符就让这一步失败（action=exec）",
+      "type": "checkbox",
+      "default": "true"
+    },
+    "remoteDir": {
+      "label": "远端目录（不存在会创建，action=publish）",
+      "type": "vuex-input",
+      "default": ""
+    },
+    "sourceFiles": {
+      "label": "要传的文件（逗号分隔的 glob）",
+      "type": "vuex-input",
+      "default": "**/*"
+    },
+    "exclude": {
+      "label": "排除（逗号分隔的 glob）",
+      "type": "vuex-input",
+      "default": ""
+    },
+    "baseDir": {
+      "label": "相对目录（默认 workspace）",
+      "type": "vuex-input",
+      "default": ""
+    },
+    "deleteRemote": {
+      "label": "先清空远端目录",
+      "type": "checkbox",
+      "default": "false"
+    },
+    "keyFile": {
+      "label": "私钥路径（workspace 内）",
+      "type": "vuex-input",
+      "default": ""
+    },
+    "key": {
+      "label": "或直接给私钥内容",
+      "type": "password",
+      "default": ""
+    },
+    "knownHostsFile": {
+      "label": "known_hosts 文件（留空用系统默认）",
+      "type": "vuex-input",
+      "default": ""
+    },
+    "strictHostKeyChecking": {
+      "label": "主机密钥校验（accept-new / yes / no）",
+      "type": "vuex-input",
+      "default": "accept-new"
+    },
+    "timeoutSeconds": {
+      "label": "超时（秒）",
+      "type": "vuex-input",
+      "default": "120"
+    }
+  },
+  "output": {
+    "filesUploaded": {
+      "type": "string",
+      "description": "传输的文件数（publish）"
+    },
+    "bytes": {
+      "type": "string",
+      "description": "传输的字节数（未压缩的 tar，publish）"
+    },
+    "remoteDir": {
+      "type": "string",
+      "description": "远端目录（publish）"
+    },
+    "host": {
+      "type": "string",
+      "description": "主机（publish）"
+    },
+    "exitCode": {
+      "type": "string",
+      "description": "远端命令的退出码（exec）"
+    },
+    "durationMs": {
+      "type": "string",
+      "description": "耗时（毫秒，exec）"
+    },
+    "stdoutBytes": {
+      "type": "string",
+      "description": "标准输出字节数（exec）"
+    }
+  },
+  "x-jenkins": {
+    "protocol": "jenkins-1",
+    "requires": {
+      "runner": ">=0.3.0"
+    }
+  }
+}
