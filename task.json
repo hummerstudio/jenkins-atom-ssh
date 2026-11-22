@@ -1,7 +1,7 @@
 {
   "atomCode": "ssh",
   "name": "SSH",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Copies files to another machine over SSH, or runs a shell command over there: one connection, two verbs.",
   "execution": {
     "packagePath": "ssh.jar",
@@ -138,7 +138,7 @@
   "x-jenkins": {
     "protocol": "jenkins-1",
     "requires": {
-      "runner": ">=0.3.0"
+      "runner": ">=0.4.0"
     }
   }
 }
